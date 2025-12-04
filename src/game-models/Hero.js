@@ -1,19 +1,32 @@
+const COLUMN = 30;
+const ROW = 10;
 // Наш герой.
 
 class Hero {
-  constructor({ position }) {
+  constructor(position_row, position_column) {
     this.skin = '🤠'; // можете использовать любые emoji '💃'
-    this.position = position;
+    this.position_row = position_row;
+    this.position_column = position_column;
   }
 
   moveLeft() {
     // Идём влево.
-    this.position -= 1;
+    if (this.position_column > 0) this.position_column -= 1;
   }
 
   moveRight() {
     // Идём вправо.
-    this.position += 1;
+    if (this.position_column < COLUMN) this.position_column += 1;
+  }
+
+  moveUp() {
+    // Идём влево.
+    if (this.position_row > 0) this.position_row -= 1;
+  }
+
+  moveDown() {
+    // Идём влево.
+    if (this.position_row < ROW) this.position_row += 1;
   }
 
   attack() {

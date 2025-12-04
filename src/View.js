@@ -1,14 +1,24 @@
 // Сделаем отдельный класс для отображения игры в консоли.
+const COLUMN = 30;
+const ROW = 10;
 
 class View {
-  render() {
-    const yourTeamName = 'Elbrus';
+  static drawField(field, hero) {
+    let str = '';
 
-    // Тут всё рисуем.
     console.clear();
-    console.log(this.game.track.join(''));
+
+    for (let i = 0; i < ROW; i++) {
+      for (let j = 0; j < COLUMN; j++) {
+        str += field[i][j];
+      }
+      str += '\n';
+    }
+    console.log(str);
+    console.log('posithion ', hero.position_row, hero.position_column);
+
     console.log('\n\n');
-    console.log(`Created by "${yourTeamName}" with love`);
+    console.log(`Created by Codiki with love`);
   }
 }
 
