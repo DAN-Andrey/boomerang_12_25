@@ -1,7 +1,5 @@
 'use strict';
 
-const { faker } = require('@faker-js/faker');
-
 /** @type {import('sequelize-cli').Migration} */
 
 module.exports = {
@@ -15,7 +13,6 @@ module.exports = {
         durationSec: Math.floor(Math.random() * 10) + 1,
       });
     }
-
     await queryInterface.bulkInsert('GameResults', arrOfResults,{},);
   },
 
