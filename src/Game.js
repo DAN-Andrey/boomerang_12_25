@@ -27,7 +27,7 @@ class Game {
     for (let i = 0; i < ROW; i++) {
       this.field[i] = new Array(COLUMN).fill(' ');
     }
-    if (this.hero.boomerang)
+    if (this.hero.boomerang.active)
       this.field[this.hero.boomerang.position_row][this.hero.boomerang.position_column] =
         this.hero.boomerang.skin;
     this.field[this.hero.position_row][this.hero.position_column] = this.hero.skin;
@@ -44,7 +44,10 @@ class Game {
     setInterval(() => {
       // Let's play!
       // this.check();
-      if (this.hero.boomerang.active === true) this.hero.boomerang.fly();
+      if (this.hero.boomerang.active === true) {
+        this.hero.catchBoomerang();
+        this.hero.boomerang.fly();
+      }
       this.regenerateField();
       View.drawField(this.field);
     }, 200);

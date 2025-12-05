@@ -19,14 +19,13 @@ class Boomerang {
   }
 
   moveLeft() {
-    // Идём влево.
+    // Летит влево.
     this.position_column--;
     if (this.position_column <= 0) this.direction = 'rigth';
   }
 
   moveRight() {
-    // Идём вправо.
-    this.position_column += 1;
+    // Летит вправо.
     this.position_column++;
     if (this.position_column >= COLUMN - 1) this.direction = 'left';
   }
