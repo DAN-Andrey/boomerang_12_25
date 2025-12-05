@@ -6,7 +6,7 @@ const ROW = 10;
 class Hero {
   constructor(position_row, position_column) {
     this.skin = '🤠'; // можете использовать любые emoji '💃'
-    this.boomerang = new Boomerang(position_row, position_column, 'rigth');
+    this.boomerang = new Boomerang(position_row, position_column);
     this.position_row = position_row;
     this.position_column = position_column;
   }
@@ -37,7 +37,7 @@ class Hero {
     if (this.position_row < 0) this.position_row = 0;
     if (!this.boomerang.active) {
       this.boomerang.position_row = this.position_row;
-      // this.boomerang.direction = 'up';
+      this.boomerang.direction = 'up';
     }
   }
 
@@ -47,9 +47,8 @@ class Hero {
     if (this.position_row >= ROW) this.position_row = ROW - 1;
     if (!this.boomerang.active) {
       this.boomerang.position_row = this.position_row;
-      // this.boomerang.direction = 'down';
+      this.boomerang.direction = 'down';
     }
-    
   }
 
   catchBoomerang() {

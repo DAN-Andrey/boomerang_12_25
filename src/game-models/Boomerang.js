@@ -10,12 +10,26 @@ class Boomerang {
     this.active = false;
     this.position_row = position_row;
     this.position_column = position_column;
-    this.direction = this.direction;
+    this.direction = 'rigth';
   }
 
   fly() {
     if (this.direction === 'rigth') this.moveRight();
     if (this.direction === 'left') this.moveLeft();
+    if (this.direction === 'up') this.moveUp();
+    if (this.direction === 'down') this.moveDown();
+  }
+
+  moveUp() {
+    // Летит вверх.
+    this.position_row--;
+    if (this.position_row <= 0) this.direction = 'down';
+  }
+
+  moveDown() {
+    // Летит вниз.
+    this.position_row++;
+    if (this.position_row >= ROW - 1) this.direction = 'up';
   }
 
   moveLeft() {
