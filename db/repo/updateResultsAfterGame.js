@@ -1,10 +1,11 @@
 const { Hero } = require('../models');
+const player = require('../../run');
 
-async function updateResultsAfterGame(player) {
+async function updateResultsAfterGame(score, time) {
   await Hero.update(
     {
-      bestScore: player.bestScore,
-      totalGames: player.totalGames,
+      bestScore: 100,
+      totalGames: ++player.totalGames,
     },
     {
       where: {
@@ -12,6 +13,8 @@ async function updateResultsAfterGame(player) {
       },
     },
   );
+
+  console.log();
 }
 
 module.exports = { updateResultsAfterGame };
