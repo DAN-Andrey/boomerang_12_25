@@ -1,11 +1,13 @@
-// Основной файл.
-// Запускает игру.
 const Game = require('./src/Game');
 const runInteractiveConsole = require('./src/keyboard');
 
-// Инициализация игры с настройками.
 const game = new Game();
 
-// Запуск игры.
+const originalAttack = game.hero.attack;
+game.hero.attack = function () {
+  originalAttack.call(this);
+  game.handleAttack();
+};
+
 runInteractiveConsole(game.hero);
 game.play();

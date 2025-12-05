@@ -2,7 +2,8 @@ class Enemy {
   constructor(id = 1) {
     this.id = id;
     this.generateSkin();
-    this.position = 28;
+    this.row = 1;
+    this.col = 25;
     this.isAlive = true;
   }
 
@@ -22,11 +23,6 @@ class Enemy {
       '🎃',
     ];
     this.skin = skins[Math.floor(Math.random() * skins.length)];
-  }
-
-  moveLeft() {
-    // Идём влево.
-    this.position -= 1;
   }
 
   die() {
