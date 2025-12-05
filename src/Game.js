@@ -13,33 +13,63 @@ const View = require('./View');
 class Game {
   constructor({ trackLength }) {
     this.trackLength = trackLength;
-    this.hero = new Hero(); // Герою можно аргументом передать бумеранг.
-    this.enemy = new Enemy();
+    this.hero = new Hero({ position: 2 }); // герой слева
+    this.enemy = new Enemy(1); // первый враг
     this.view = new View();
+    this.enemiesKilled = 0; // СЧЁТЧИК УБИТЫХ — ТВОЯ ЧАСТЬ
     this.track = [];
     this.regenerateTrack();
   }
 
+  killEnemy() {
+    if (this.enemy.isAlive) {
+      this.enemy.die();
+      this.enemiesKilled++;
+      console.log(`💥 Враг #${this.enemy.id} убит! Всего: ${this.enemiesKilled}`);
+      this.enemy = this.enemy.respawn(this.enemiesKilled + 1);
+    }
+  }
+
+  handleAttack() {
+    if (this.hero.position === this.enemy.position && this.enemy.isAlive) {
+      this.killEnemy();
+    }
+    this.regenerateTrack();
+  }
+
   regenerateTrack() {
-    // Сборка всего необходимого (герой, враг(и), оружие)
-    // в единую структуру данных
-    this.track = (new Array(this.trackLength)).fill(' ');
+    this.track = new Array(this.trackLength).fill(' ');
+    // Отображаем врага ТОЛЬКО если он жив
+    if (this.enemy.isAlive) {
+      this.track[this.enemy.position] = this.enemy.skin;
+    }
+    // Герой всегда отображается
     this.track[this.hero.position] = this.hero.skin;
   }
 
   check() {
-    if (this.hero.position === this.enemy.position) {
+    // Столкновение героя и врага → смерть героя
+    if (this.hero.position === this.enemy.position && this.enemy.isAlive) {
       this.hero.die();
     }
   }
 
   play() {
-    setInterval(() => {
-      // Let's play!
+    // Игровой цикл
+    const gameLoop = () => {
       this.check();
       this.regenerateTrack();
       this.view.render(this.track);
-    });
+    };
+
+    // Пример: автоматическая атака каждые 4 секунды — ТОЛЬКО ДЛЯ ТЕСТА ТВОЕЙ ЛОГИКИ
+    // Позже эту строку уберёт Андрей или Даша, когда подключит управление
+    setInterval(() => {
+      this.handleAttack(); // ← ТВОЙ МЕТОД
+    }, 4000);
+
+    gameLoop();
+    setInterval(gameLoop, 500);
   }
 }
 
