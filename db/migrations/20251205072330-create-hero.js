@@ -13,10 +13,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       bestScore: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       totalGames: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
