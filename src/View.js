@@ -6,7 +6,6 @@ class View {
     let str = '';
 
     console.clear();
-
     for (let i = 0; i < ROW; i++) {
       for (let j = 0; j < COLUMN; j++) {
         str += field[i][j];
@@ -22,4 +21,4 @@ class View {
   }
 }
 
-module.exports = View;
+module.exports = { View, COLUMN, ROW };

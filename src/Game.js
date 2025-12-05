@@ -1,8 +1,6 @@
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
-const View = require('./View');
-const COLUMN = 30;
-const ROW = 10;
+const { View, COLUMN, ROW } = require('./View');
 
 // Основной класс игры.
 class Game {
@@ -20,7 +18,7 @@ class Game {
     for (let i = 0; i < ROW; i++) {
       this.field[i] = new Array(COLUMN).fill(' ');
     }
-    if (this.hero.boomerang.active)
+    if (this.hero.boomerang.active || this.hero.boomerang.wasStoped)
       this.field[this.hero.boomerang.position_row][this.hero.boomerang.position_column] =
         this.hero.boomerang.skin;
     this.field[this.hero.position_row][this.hero.position_column] = this.hero.skin;
@@ -30,8 +28,8 @@ class Game {
   play() {
     setInterval(() => {
       this.enemy.killHero(this.hero);
-      if (this.hero.boomerang.active) {
-        this.hero.catchBoomerang();
+      this.hero.catchBoomerang();
+      if (this.hero.boomerang.active && !this.hero.onePositionWithBoomerang()) {
         this.hero.boomerang.fly();
         this.hero.killEnemy(this.enemy);
       }

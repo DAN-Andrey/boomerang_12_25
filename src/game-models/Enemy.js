@@ -1,5 +1,4 @@
-const COLUMN = 30;
-const ROW = 10;
+const { COLUMN, ROW } = require('../View');
 // Враг.
 
 class Enemy {

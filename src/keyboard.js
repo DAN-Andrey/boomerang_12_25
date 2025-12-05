@@ -12,7 +12,7 @@ function runInteractiveConsole(hero) {
     s: () => hero.moveDown(),
     down: () => hero.moveDown(),
     space: () => {
-      if (!hero.boomerang.active) hero.attack();
+      if (!hero.boomerang.active && hero.onePositionWithBoomerang()) hero.attack();
     },
   };
 
