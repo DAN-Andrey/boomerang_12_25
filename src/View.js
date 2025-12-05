@@ -9,15 +9,14 @@ class View {
     console.clear();
 
     for (let i = 0; i < ROW; i++) {
-      str += '| ';
       for (let j = 0; j < COLUMN; j++) {
         str += field[i][j];
       }
-      str += ' |\n';
+      if (i < ROW - 1) str += '\n';
     }
-    console.log('__________________________________');
+    console.log('______________________________');
     console.log(str);
-    console.log('__________________________________');
+    console.log('‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾');
     console.log('\n\n');
     console.log(`Created by Codiki with love`);
   }

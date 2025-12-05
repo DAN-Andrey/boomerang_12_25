@@ -10,7 +10,6 @@ class Hero {
   }
 
   moveLeft() {
-    console.log('posithion ', this.position_row, this.position_column);
     // Идём влево.
     this.position_column--;
     if (this.position_column < 0) this.position_column = 0;
@@ -18,7 +17,6 @@ class Hero {
   }
 
   moveRight() {
-    console.log('posithion ', this.position_row, this.position_column);
     // Идём вправо.
     this.position_column++;
     if (this.position_column >= COLUMN) this.position_column = COLUMN - 1;
@@ -26,7 +24,6 @@ class Hero {
   }
 
   moveUp() {
-    console.log('posithion ', this.position_row, this.position_column);
     // Идём влево.
     this.position_row--;
     if (this.position_row < 0) this.position_row = 0;
@@ -34,7 +31,6 @@ class Hero {
   }
 
   moveDown() {
-    console.log('posithion ', this.position_row, this.position_column);
     // Идём влево.
     this.position_row++;
     if (this.position_row >= ROW) this.position_row = ROW - 1;
