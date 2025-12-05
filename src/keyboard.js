@@ -17,7 +17,6 @@ const keyboard = {
   w: () => HERO.moveUp(),
   s: () => HERO.moveDown(),
   a: () => HERO.moveLeft(),
-  q: () => process.exit(),
 };
 
 // Какая-то функция.
@@ -31,7 +30,7 @@ function runInteractiveConsole() {
         keyboard[key.name]();
       }
       // Прерывание программы.
-      if (key.ctrl && key.name === 'c') {
+      if ((key.ctrl && key.name === 'c') || key.name === 'q') {
         process.exit();
       }
     }
