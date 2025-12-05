@@ -6,22 +6,15 @@ const keypress = require('keypress');
 
 // Управление.
 // Настроим соответствия нажатий на клавиши и действий в игре.
-let HERO;
 
-function getHero(hero) {
-  HERO = hero;
-}
+function runInteractiveConsole(hero) {
+  const keyboard = {
+    d: () => hero.moveRight(),
+    w: () => hero.moveUp(),
+    s: () => hero.moveDown(),
+    a: () => hero.moveLeft(),
+  };
 
-const keyboard = {
-  d: () => HERO.moveRight(),
-  w: () => HERO.moveUp(),
-  s: () => HERO.moveDown(),
-  a: () => HERO.moveLeft(),
-};
-
-// Какая-то функция.
-
-function runInteractiveConsole() {
   keypress(process.stdin);
   process.stdin.on('keypress', (ch, key) => {
     if (key) {
@@ -38,4 +31,4 @@ function runInteractiveConsole() {
   process.stdin.setRawMode(true);
 }
 
-module.exports = { runInteractiveConsole, getHero };
+module.exports = runInteractiveConsole;
