@@ -27,7 +27,7 @@ function runInteractiveConsole() {
     if (key) {
       // Вызывает команду, соответствующую нажатой кнопке.
       if (key.name in keyboard) {
-        keyboard[key.name]();
+        return keyboard[key.name]();
       }
       // Прерывание программы.
       if ((key.ctrl && key.name === 'c') || key.name === 'q') {
@@ -39,7 +39,3 @@ function runInteractiveConsole() {
 }
 
 module.exports = { runInteractiveConsole, getHero };
-
-// Давай попробуем запустить этот скрипт!
-
-runInteractiveConsole();

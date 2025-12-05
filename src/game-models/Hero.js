@@ -11,22 +11,30 @@ class Hero {
 
   moveLeft() {
     // Идём влево.
-    if (this.position_row > 0) this.position_column--;
+    this.position_column--;
+    if (this.position_column < 0) this.position_column = 0;
+    return this.position_column;
   }
 
   moveRight() {
     // Идём вправо.
-    if (this.position_row < ROW) this.position_column++;
+    this.position_column++;
+    if (this.position_column >= COLUMN) this.position_column = COLUMN - 1;
+    return this.position_column;
   }
 
   moveUp() {
     // Идём влево.
-    if (this.position_column > 0) this.position_row--;
+    this.position_row--;
+    if (this.position_row < 0) this.position_row = 0;
+    return this.position_row;
   }
 
   moveDown() {
     // Идём влево.
-    if (this.position_column < COLUMN) this.position_row++;
+    this.position_row++;
+    if (this.position_row >= ROW) this.position_row = ROW - 1;
+    return this.position_row;
   }
 
   attack() {
