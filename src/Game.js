@@ -1,55 +1,42 @@
-// Импортируем всё необходимое.
-// Или можно не импортировать,
-// а передавать все нужные объекты прямо из run.js при инициализации new Game().
-
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
-// const Boomerang = require('./game-models/Boomerang');
-const View = require('./View');
-const { runInteractiveConsole, getHero } = require('./keyboard');
-const COLUMN = 30;
-const ROW = 10;
+const { View, COLUMN, ROW } = require('./View');
 
 // Основной класс игры.
-// Тут будут все настройки, проверки, запуск.
-
 class Game {
   constructor() {
-    this.hero = new Hero(1, 1); // Герою можно аргументом передать бумеранг.
-    // this.enemy = new Enemy();
+    this.hero = new Hero(1, 1);
+    this.enemy = new Enemy();
     this.view = new View();
     this.field = [[]];
-    this.regenerateTrack();
+    this.regenerateField();
   }
 
-  regenerateTrack() {
+  regenerateField() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных (двумерный массив в виде поля)
-
-    // this.field = new Array(ROW).fill(new Array(COLUMN).fill(' '));
     for (let i = 0; i < ROW; i++) {
       this.field[i] = new Array(COLUMN).fill(' ');
     }
+    if (this.hero.boomerang.active || this.hero.boomerang.wasStoped)
+      this.field[this.hero.boomerang.position_row][this.hero.boomerang.position_column] =
+        this.hero.boomerang.skin;
     this.field[this.hero.position_row][this.hero.position_column] = this.hero.skin;
-    // добавление врага
-    // добавление бумеранга
+    this.field[this.enemy.position_row][this.enemy.position_column] = this.enemy.skin;
   }
-
-  // check() {
-  //   if (this.hero.position === this.enemy.position) {
-  //     this.hero.die();
-  //   }
-  // }
 
   play() {
     setInterval(() => {
-      // Let's play!
-      // this.check();
-      this.regenerateTrack();
-      View.drawField(this.field);
-      getHero(this.hero);
-      runInteractiveConsole(this.Game);
-    }, 2000);
+      this.enemy.killHero(this.hero);
+      this.hero.catchBoomerang();
+      if (this.hero.boomerang.active && !this.hero.boomerang.wasStoped) {
+        this.hero.boomerang.fly();
+        this.hero.killEnemy(this.enemy);
+      }
+      this.enemy.move();
+      this.regenerateField();
+      View.drawField(this.field, this.hero.score);
+    }, 200);
   }
 }
 
