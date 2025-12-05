@@ -19,10 +19,10 @@ class Game {
     // this.enemy = new Enemy();
     this.view = new View();
     this.field = [[]];
-    this.regenerateTrack();
+    this.regenerateField();
   }
 
-  regenerateTrack() {
+  regenerateField() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных (двумерный массив в виде поля)
 
@@ -45,7 +45,7 @@ class Game {
     setInterval(() => {
       // Let's play!
       // this.check();
-      this.regenerateTrack();
+      this.regenerateField();
       View.drawField(this.field);
       getHero(this.hero);
       runInteractiveConsole(this.Game);
