@@ -4,7 +4,7 @@ const keypress = require('keypress');
 function runInteractiveConsole(hero) {
   const keyboard = {
     d: () => hero.moveRight(),
-    rigth: () => hero.moveRight(),
+    right: () => hero.moveRight(),
     a: () => hero.moveLeft(),
     left: () => hero.moveLeft(),
     w: () => hero.moveUp(),
