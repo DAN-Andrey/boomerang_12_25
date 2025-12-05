@@ -6,7 +6,7 @@ const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
 // const Boomerang = require('./game-models/Boomerang');
 const View = require('./View');
-const runInteractiveConsole = require('./keyboard');
+// const runInteractiveConsole = require('./keyboard');
 const COLUMN = 30;
 const ROW = 10;
 
@@ -47,8 +47,7 @@ class Game {
       // this.check();
       this.regenerateField();
       View.drawField(this.field);
-      runInteractiveConsole(this.hero);
-    }, 2000);
+    }, 1000);
   }
 }
 
