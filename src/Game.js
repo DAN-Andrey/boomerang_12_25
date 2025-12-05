@@ -27,10 +27,10 @@ class Game {
     for (let i = 0; i < ROW; i++) {
       this.field[i] = new Array(COLUMN).fill(' ');
     }
-    this.field[this.hero.position_row][this.hero.position_column] = this.hero.skin;
     if (this.hero.boomerang)
       this.field[this.hero.boomerang.position_row][this.hero.boomerang.position_column] =
         this.hero.boomerang.skin;
+    this.field[this.hero.position_row][this.hero.position_column] = this.hero.skin;
     // добавление врага
   }
 
@@ -44,9 +44,10 @@ class Game {
     setInterval(() => {
       // Let's play!
       // this.check();
+      if (this.hero.boomerang.active === true) this.hero.boomerang.fly();
       this.regenerateField();
       View.drawField(this.field);
-    }, 1000);
+    }, 200);
   }
 }
 
