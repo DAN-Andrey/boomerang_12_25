@@ -1,10 +1,19 @@
 const Game = require('./src/Game');
 const runInteractiveConsole = require('./src/keyboard');
 const { createHero } = require('./db/repo/createHero');
-const { updateResultsAfterGame } = require('./db/repo/updateResultsAfterGame');
+const player = { name: process.argv[2], bestScore: 0, totalGames: 1 };
 
-// Сразу запускаем игру
-const game = new Game();
+if (process.argv.length === 3) {
+  // Инициализируем игру с этим игроком
+  createHero(player);
 
-runInteractiveConsole(game.hero);
-game.play();
+  // Сразу запускаем игру
+  const game = new Game();
+
+  runInteractiveConsole(game.hero);
+  game.play();
+} else {
+  console.log('Введите имя пользователя....');
+}
+
+module.exports = player;

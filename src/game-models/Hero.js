@@ -1,6 +1,7 @@
 const Boomerang = require('./Boomerang');
 const Sound = require('../Sound');
 const { COLUMN, ROW } = require('../View');
+const { updateResultsAfterGame } = require('../../db/repo/updateResultsAfterGame');
 // Наш герой.
 
 class Hero {
@@ -93,6 +94,7 @@ class Hero {
     const time = now - this.timeStart;
     const seconds = Math.round(time / 1000);
     Sound.playHeroDie();
+    updateResultsAfterGame(this.score, seconds);
     this.skin = '💀';
     console.log('Вы погибли!💀');
     console.log('Ваше время: ', seconds, 'секунд');
