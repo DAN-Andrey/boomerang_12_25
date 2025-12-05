@@ -1,4 +1,5 @@
 const Boomerang = require('./Boomerang');
+const Sound = require('../Sound');
 const { COLUMN, ROW } = require('../View');
 // Наш герой.
 
@@ -72,6 +73,7 @@ class Hero {
         enemy.position_column + enemy.direction === this.boomerang.position_column)
     ) {
       enemy.die();
+      Sound.playEnemyDie();
       this.score++;
       this.boomerang.active = false;
       this.boomerang.wasStoped = true;
@@ -82,6 +84,7 @@ class Hero {
     // Атакуем.
     this.boomerang.active = true;
     this.boomerang.fly();
+    Sound.playBoomerangThrow();
   }
 
   die() {
@@ -89,6 +92,7 @@ class Hero {
 
     const time = now - this.timeStart;
     const seconds = Math.round(time / 1000);
+    Sound.playHeroDie();
     this.skin = '💀';
     console.log('Вы погибли!💀');
     console.log('Ваше время: ', seconds, 'секунд');
