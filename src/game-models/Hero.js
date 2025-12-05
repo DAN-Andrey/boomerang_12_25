@@ -1,23 +1,43 @@
+const Boomerang = require('./Boomerang');
+const COLUMN = 30;
+const ROW = 10;
 // Наш герой.
 
 class Hero {
-  constructor({ position }) {
+  constructor(position_row, position_column) {
     this.skin = '🤠'; // можете использовать любые emoji '💃'
-    this.position = position;
+    // this.boomerang = new Boomerang(position_row, position_column);
+    this.position_row = position_row;
+    this.position_column = position_column;
   }
 
   moveLeft() {
     // Идём влево.
-    this.position -= 1;
+    this.position_column--;
+    if (this.position_column < 0) this.position_column = 0;
   }
 
   moveRight() {
     // Идём вправо.
-    this.position += 1;
+    this.position_column++;
+    if (this.position_column >= COLUMN) this.position_column = COLUMN - 1;
+  }
+
+  moveUp() {
+    // Идём влево.
+    this.position_row--;
+    if (this.position_row < 0) this.position_row = 0;
+  }
+
+  moveDown() {
+    // Идём влево.
+    this.position_row++;
+    if (this.position_row >= ROW) this.position_row = ROW - 1;
   }
 
   attack() {
     // Атакуем.
+    this.boomerang = new Boomerang(this.position_row, this.position_column + 1, 'rigth');
     this.boomerang.fly();
   }
 

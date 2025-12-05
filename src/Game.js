@@ -4,21 +4,20 @@
 
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
-// const Boomerang = require('./game-models/Boomerang');
 const View = require('./View');
+const COLUMN = 30;
+const ROW = 10;
 
 // Основной класс игры.
 // Тут будут все настройки, проверки, запуск.
 
 class Game {
-  constructor({ trackLength }) {
-    this.trackLength = trackLength;
-    this.hero = new Hero({ position: 2 }); // герой слева
-    this.enemy = new Enemy(1); // первый враг
+  constructor() {
+    this.hero = new Hero(1, 1); // Герою можно аргументом передать бумеранг.
+    // this.enemy = new Enemy();
     this.view = new View();
-    this.enemiesKilled = 0; // СЧЁТЧИК УБИТЫХ — ТВОЯ ЧАСТЬ
-    this.track = [];
-    this.regenerateTrack();
+    this.field = [[]];
+    this.regenerateField();
   }
 
   killEnemy() {
@@ -37,39 +36,33 @@ class Game {
     this.regenerateTrack();
   }
 
-  regenerateTrack() {
-    this.track = new Array(this.trackLength).fill(' ');
-    // Отображаем врага ТОЛЬКО если он жив
-    if (this.enemy.isAlive) {
-      this.track[this.enemy.position] = this.enemy.skin;
+  regenerateField() {
+    // Сборка всего необходимого (герой, враг(и), оружие)
+    // в единую структуру данных (двумерный массив в виде поля)
+
+    for (let i = 0; i < ROW; i++) {
+      this.field[i] = new Array(COLUMN).fill(' ');
     }
-    // Герой всегда отображается
-    this.track[this.hero.position] = this.hero.skin;
+    this.field[this.hero.position_row][this.hero.position_column] = this.hero.skin;
+    if (this.hero.boomerang)
+      this.field[this.hero.boomerang.position_row][this.hero.boomerang.position_column] =
+        this.hero.boomerang.skin;
+    // добавление врага
   }
 
-  check() {
-    // Столкновение героя и врага → смерть героя
-    if (this.hero.position === this.enemy.position && this.enemy.isAlive) {
-      this.hero.die();
-    }
-  }
+  // check() {
+  //   if (this.hero.position === this.enemy.position) {
+  //     this.hero.die();
+  //   }
+  // }
 
   play() {
-    // Игровой цикл
-    const gameLoop = () => {
-      this.check();
-      this.regenerateTrack();
-      this.view.render(this.track);
-    };
-
-    // Пример: автоматическая атака каждые 4 секунды — ТОЛЬКО ДЛЯ ТЕСТА ТВОЕЙ ЛОГИКИ
-    // Позже эту строку уберёт Андрей или Даша, когда подключит управление
     setInterval(() => {
-      this.handleAttack(); // ← ТВОЙ МЕТОД
-    }, 4000);
-
-    gameLoop();
-    setInterval(gameLoop, 500);
+      // Let's play!
+      // this.check();
+      this.regenerateField();
+      View.drawField(this.field);
+    }, 1000);
   }
 }
 

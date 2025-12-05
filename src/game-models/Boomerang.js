@@ -1,26 +1,30 @@
+const COLUMN = 30;
+const ROW = 10;
 // Бумеранг является оружием.
 // В дальнейшем можно добавить другое оружие.
 // Тогда можно будет создать класс Weapon и воспользоваться наследованием!
 
 class Boomerang {
-  constructor() {
+  constructor(position_row, position_column, direction) {
     this.skin = '🌀';
-    this.position = 0;
+    this.position_row = position_row;
+    this.position_column = position_column;
+    this.direction = this.direction;
   }
 
   fly() {
-    this.moveRight();
-    this.moveLeft();
+    if ((this.direction = 'rigth')) this.moveRight();
+    if ((this.direction = 'left')) this.moveLeft();
   }
 
   moveLeft() {
     // Идём влево.
-    this.position -= 1;
+    this.position_column -= 1;
   }
 
   moveRight() {
     // Идём вправо.
-    this.position += 1;
+    this.position_column += 1;
   }
 }
 
