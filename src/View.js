@@ -3,7 +3,7 @@ const COLUMN = 30;
 const ROW = 10;
 
 class View {
-  static drawField(field, hero) {
+  static drawField(field) {
     let str = '';
 
     console.clear();
@@ -15,8 +15,6 @@ class View {
       str += '\n';
     }
     console.log(str);
-    console.log('posithion ', hero.position_row, hero.position_column);
-
     console.log('\n\n');
     console.log(`Created by Codiki with love`);
   }

@@ -46,8 +46,7 @@ class Game {
       // Let's play!
       // this.check();
       this.regenerateTrack();
-
-      View.drawField(this.field, this.hero);
+      View.drawField(this.field);
       getHero(this.hero);
       runInteractiveConsole(this.Game);
     }, 2000);
