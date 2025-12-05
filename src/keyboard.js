@@ -10,9 +10,13 @@ const keypress = require('keypress');
 function runInteractiveConsole(hero) {
   const keyboard = {
     d: () => hero.moveRight(),
-    w: () => hero.moveUp(),
-    s: () => hero.moveDown(),
+    rigth: () => hero.moveRight(),
     a: () => hero.moveLeft(),
+    left: () => hero.moveLeft(),
+    w: () => hero.moveUp(),
+    up: () => hero.moveUp(),
+    s: () => hero.moveDown(),
+    down: () => hero.moveDown(),
   };
 
   keypress(process.stdin);
