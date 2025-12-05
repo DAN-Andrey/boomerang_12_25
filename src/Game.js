@@ -48,7 +48,7 @@ class Game {
       this.regenerateField();
       View.drawField(this.field);
       getHero(this.hero);
-      runInteractiveConsole(this.Game);
+      runInteractiveConsole();
     }, 2000);
   }
 }
