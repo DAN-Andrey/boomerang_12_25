@@ -4,9 +4,7 @@
 
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
-// const Boomerang = require('./game-models/Boomerang');
 const View = require('./View');
-// const runInteractiveConsole = require('./keyboard');
 const COLUMN = 30;
 const ROW = 10;
 
@@ -26,13 +24,14 @@ class Game {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных (двумерный массив в виде поля)
 
-    // this.field = new Array(ROW).fill(new Array(COLUMN).fill(' '));
     for (let i = 0; i < ROW; i++) {
       this.field[i] = new Array(COLUMN).fill(' ');
     }
     this.field[this.hero.position_row][this.hero.position_column] = this.hero.skin;
+    if (this.hero.boomerang)
+      this.field[this.hero.boomerang.position_row][this.hero.boomerang.position_column] =
+        this.hero.boomerang.skin;
     // добавление врага
-    // добавление бумеранга
   }
 
   // check() {

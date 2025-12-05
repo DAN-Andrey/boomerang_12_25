@@ -17,6 +17,7 @@ function runInteractiveConsole(hero) {
     up: () => hero.moveUp(),
     s: () => hero.moveDown(),
     down: () => hero.moveDown(),
+    space: () => hero.attack(),
   };
 
   keypress(process.stdin);
