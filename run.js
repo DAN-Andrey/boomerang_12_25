@@ -1,9 +1,27 @@
+// run.js
 const Game = require('./src/Game');
-const runInteractiveConsole = require('./src/keyboard');
+const readline = require('readline');
+const { createHero } = require('./db/repo/createHero');
+const { updateResultsAfterGame } = require('./db/repo/updateResultsAfterGame');
 
-// Инициализация игры с настройками.
-const game = new Game();
+// Функция для ввода имени через консоль
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-// Запуск игры.
-runInteractiveConsole(game.hero);
-game.play();
+rl.question('Введите имя игрока: ', async (name) => {
+  // Создаём объект игрока
+  const player = { name, bestScore: 0, totalGames: 1 };
+
+  // Инициализируем игру с этим игроком
+  await createHero(player);
+
+  // Сразу запускаем игру
+  const game = new Game(player);
+  game.play();
+
+  rl.close();
+
+  await updateResultsAfterGame(player);
+});
