@@ -1,7 +1,3 @@
-// Импортируем всё необходимое.
-// Или можно не импортировать,
-// а передавать все нужные объекты прямо из run.js при инициализации new Game().
-
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
 const View = require('./View');
@@ -9,12 +5,10 @@ const COLUMN = 30;
 const ROW = 10;
 
 // Основной класс игры.
-// Тут будут все настройки, проверки, запуск.
-
 class Game {
   constructor() {
-    this.hero = new Hero(1, 1); // Герою можно аргументом передать бумеранг.
-    // this.enemy = new Enemy();
+    this.hero = new Hero(1, 1);
+    this.enemy = new Enemy();
     this.view = new View();
     this.field = [[]];
     this.regenerateField();
@@ -23,7 +17,6 @@ class Game {
   regenerateField() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных (двумерный массив в виде поля)
-
     for (let i = 0; i < ROW; i++) {
       this.field[i] = new Array(COLUMN).fill(' ');
     }
@@ -31,25 +24,20 @@ class Game {
       this.field[this.hero.boomerang.position_row][this.hero.boomerang.position_column] =
         this.hero.boomerang.skin;
     this.field[this.hero.position_row][this.hero.position_column] = this.hero.skin;
-    // добавление врага
+    this.field[this.enemy.position_row][this.enemy.position_column] = this.enemy.skin;
   }
-
-  // check() {
-  //   if (this.hero.position === this.enemy.position) {
-  //     this.hero.die();
-  //   }
-  // }
 
   play() {
     setInterval(() => {
-      // Let's play!
-      // this.check();
-      if (this.hero.boomerang.active === true) {
+      this.enemy.killHero(this.hero);
+      if (this.hero.boomerang.active) {
         this.hero.catchBoomerang();
         this.hero.boomerang.fly();
+        this.hero.killEnemy(this.enemy);
       }
+      this.enemy.move();
       this.regenerateField();
-      View.drawField(this.field);
+      View.drawField(this.field, this.hero.score);
     }, 200);
   }
 }

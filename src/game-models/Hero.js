@@ -9,6 +9,7 @@ class Hero {
     this.boomerang = new Boomerang(position_row, position_column);
     this.position_row = position_row;
     this.position_column = position_column;
+    this.score = 0;
   }
 
   moveLeft() {
@@ -17,7 +18,7 @@ class Hero {
     if (this.position_column < 0) this.position_column = 0;
     if (!this.boomerang.active) {
       this.boomerang.position_column = this.position_column;
-      this.boomerang.direction = 'left';
+      this.boomerang.direction = -1;
     }
   }
 
@@ -27,7 +28,7 @@ class Hero {
     if (this.position_column >= COLUMN) this.position_column = COLUMN - 1;
     if (!this.boomerang.active) {
       this.boomerang.position_column = this.position_column;
-      this.boomerang.direction = 'rigth';
+      this.boomerang.direction = 1;
     }
   }
 
@@ -37,7 +38,6 @@ class Hero {
     if (this.position_row < 0) this.position_row = 0;
     if (!this.boomerang.active) {
       this.boomerang.position_row = this.position_row;
-      this.boomerang.direction = 'up';
     }
   }
 
@@ -47,7 +47,6 @@ class Hero {
     if (this.position_row >= ROW) this.position_row = ROW - 1;
     if (!this.boomerang.active) {
       this.boomerang.position_row = this.position_row;
-      this.boomerang.direction = 'down';
     }
   }
 
@@ -57,6 +56,18 @@ class Hero {
       this.position_column === this.boomerang.position_column
     )
       this.boomerang.active = false;
+  }
+
+  killEnemy(enemy) {
+    if (
+      (enemy.position_row === this.boomerang.position_row &&
+        enemy.position_column === this.boomerang.position_column) ||
+      (enemy.position_row === this.boomerang.position_row &&
+        enemy.position_column + enemy.direction === this.boomerang.position_column)
+    ) {
+      enemy.die();
+      this.score++;
+    }
   }
 
   attack() {
