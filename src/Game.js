@@ -16,22 +16,15 @@ class Game {
   }
 
   killEnemy() {
-    if (!this.enemy.isAlive) return;
-
     this.enemy.die();
     this.enemiesKilled++;
     console.log(`💥 Враг #${this.enemy.id} убит! Всего: ${this.enemiesKilled}`);
-
     this.enemy = this.enemy.respawn(this.enemiesKilled + 1);
     this.regenerateField();
   }
 
   handleAttack() {
-    if (
-      this.enemy.isAlive &&
-      this.hero.position_row === this.enemy.row &&
-      this.hero.position_column === this.enemy.col
-    ) {
+    if (this.enemy.wasHitByHero(this.hero.position_row, this.hero.position_column)) {
       this.killEnemy();
     }
   }
@@ -50,9 +43,16 @@ class Game {
 
   play() {
     setInterval(() => {
+      this.enemy.moveLeft();
+
+      if (this.enemy.hasTouchedHero(this.hero.position_row, this.hero.position_column)) {
+        this.hero.die();
+        return;
+      }
+
       this.regenerateField();
       View.drawField(this.field);
-    }, 1000);
+    }, 300);
   }
 }
 
