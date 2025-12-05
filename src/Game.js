@@ -29,7 +29,7 @@ class Game {
     setInterval(() => {
       this.enemy.killHero(this.hero);
       this.hero.catchBoomerang();
-      if (this.hero.boomerang.active && !this.hero.onePositionWithBoomerang()) {
+      if (this.hero.boomerang.active && !this.hero.boomerang.wasStoped) {
         this.hero.boomerang.fly();
         this.hero.killEnemy(this.enemy);
       }
