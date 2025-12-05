@@ -7,24 +7,27 @@ const ROW = 10;
 class Boomerang {
   constructor(position_row, position_column, direction) {
     this.skin = '🌀';
+    this.active = false;
     this.position_row = position_row;
     this.position_column = position_column;
-    this.direction = this.direction;
+    this.direction = 1;
   }
 
   fly() {
-    if ((this.direction = 'rigth')) this.moveRight();
-    if ((this.direction = 'left')) this.moveLeft();
+    if (this.direction === 1) this.moveRight();
+    if (this.direction === -1) this.moveLeft();
   }
 
   moveLeft() {
-    // Идём влево.
-    this.position_column -= 1;
+    // Летит влево.
+    this.position_column--;
+    if (this.position_column <= 0) this.direction = 1;
   }
 
   moveRight() {
-    // Идём вправо.
-    this.position_column += 1;
+    // Летит вправо.
+    this.position_column++;
+    if (this.position_column >= COLUMN - 1) this.direction = -1;
   }
 }
 

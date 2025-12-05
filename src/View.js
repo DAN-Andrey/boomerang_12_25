@@ -1,9 +1,8 @@
-// Сделаем отдельный класс для отображения игры в консоли.
 const COLUMN = 30;
 const ROW = 10;
 
 class View {
-  static drawField(field) {
+  static drawField(field, score) {
     let str = '';
 
     console.clear();
@@ -17,6 +16,7 @@ class View {
     console.log('______________________________');
     console.log(str);
     console.log('‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾');
+    console.log('Врагов убито: ', score);
     console.log('\n\n');
     console.log(`Created by Codiki with love`);
   }
