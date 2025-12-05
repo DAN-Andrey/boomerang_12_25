@@ -30,11 +30,14 @@ class Game {
   play() {
     setInterval(() => {
       this.enemy.killHero(this.hero);
+
       if (this.hero.boomerang.active) {
         this.hero.catchBoomerang();
         this.hero.boomerang.fly();
         this.hero.killEnemy(this.enemy);
+        View.playEnemyDie();
       }
+
       this.enemy.move();
       this.regenerateField();
       View.drawField(this.field, this.hero.score);

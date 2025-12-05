@@ -1,6 +1,7 @@
 const Boomerang = require('./Boomerang');
 const COLUMN = 30;
 const ROW = 10;
+const View = require('../View');
 // Наш герой.
 
 class Hero {
@@ -74,10 +75,12 @@ class Hero {
     // Атакуем.
     this.boomerang.active = true;
     this.boomerang.fly();
+    View.playBoomerangThrow();
   }
 
   die() {
     this.skin = '💀';
+    View.playHeroDie();
     console.log('YOU ARE DEAD!💀');
     process.exit();
   }
